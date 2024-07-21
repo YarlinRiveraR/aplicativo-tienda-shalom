@@ -2,25 +2,24 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#listaProducto" type="button" role="tab" aria-controls="listaProducto" aria-selected="true">Productos</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#listaMetodoPago" type="button" role="tab" aria-controls="listaMetodoPago" aria-selected="true">Métodos de Pago</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#nuevoProducto" type="button" role="tab" aria-controls="nuevoProducto" aria-selected="false">Nuevo</button>
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#nuevoMetodoPago" type="button" role="tab" aria-controls="nuevoMetodoPago" aria-selected="false">Nuevo</button>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="listaProducto" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="listaMetodoPago" role="tabpanel" aria-labelledby="home-tab">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover align-middle" style="width: 100%;" id="tblProductos">
+                    <table class="table table-bordered table-striped table-hover align-middle" style="width: 100%;" id="tblMetodosPago">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
                                 <th>Imagen</th>
+                                <th>Numero de Cuenta</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -31,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="nuevoProducto" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="nuevoMetodoPago" role="tabpanel" aria-labelledby="profile-tab">
         <div class="card">
             <div class="card-body p-5">
                 <form id="frmRegistro">
@@ -39,46 +38,21 @@
                         <input type="hidden" id="id" name="id">
                         <input type="hidden" id="imagen_actual" name="imagen_actual">
                         <div class="col-md-5">
-                            <label for="nombre">Título</label>
+                            <label for="nombre">Nombre</label>
                             <div class="input-group input-group-outline my-3">
-                                <label class="form-label" for="nombre">Título</label>
+                                <label class="form-label" for="nombre">Nombre</label>
                                 <input id="nombre" class="form-control" type="text" name="nombre">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="precio">Precio</label>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label" for="precio">Precio</label>
-                                <input id="precio" class="form-control" type="text" name="precio">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cantidad">Cantidad</label>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label" for="cantidad">Cantidad</label>
-                                <input id="cantidad" class="form-control" type="number" name="cantidad">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="categoria">Categoria</label>
-                            <div class="input-group input-group-outline my-3">
-                                <select id="categoria" class="form-control" name="categoria">
-                                    <option value="">Seleccionar</option>
-                                    <?php foreach ($data['categorias'] as $categoria) { ?>
-                                        <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['categoria']; ?></option>
-                                    <?php } ?>
-                                </select>
                             </div>
                         </div>
 
                         <div class="col-md-5">
-                            <label for="descripcion">Descripción</label>
+                            <label for="numero_cuenta">Numero de Cuenta</label>
                             <div class="input-group input-group-outline my-3">
-                                <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                                <textarea id="numero_cuenta" name="numero_cuenta" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-md-7">
-                        <label for="imagen">Imagen</label>
+                        <label for="imagen">Imagen del Código QR</label>
                             <div class="input-group input-group-outline my-3">
                                 <input id="imagen" type="file" class="form-control" name="imagen">
                             </div>
@@ -122,7 +96,7 @@
 
 <?php include_once 'Views/template/footer-admin.php'; ?>
 
-<script src="<?php echo BASE_URL . 'assets/js/modulos/productos.js'; ?>"></script>
+<script src="<?php echo BASE_URL . 'assets/js/modulos/metodosPago.js'; ?>"></script>
 
 </body>
 

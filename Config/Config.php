@@ -1,9 +1,9 @@
 <?php
-const BASE_URL = "http://localhost/tienda-online/";
+const BASE_URL = "http://localhost/tienda-online-shalom/";
 const HOST = "localhost";
 const USER = "root";
 const PASS = "";
-const DB = "tienda-online";
+const DB = "tienda_virtual_shalom";
 const CHARSET = "charset=utf8";
 const TITLE = "Shalom Pijamas";
 const MONEDA = "USD";

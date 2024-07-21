@@ -57,12 +57,12 @@
                                                     </h2>
                                                 </div>
 
-                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <div id="paypal-button-container"></div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                         <a class="btn btn-danger" href="<?php echo BASE_URL . 'clientes/salir'; ?>"><i class="fas fa-times-circle"></i> Cerrar Sesión</a>
                                     </div>
