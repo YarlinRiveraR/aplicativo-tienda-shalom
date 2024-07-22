@@ -91,6 +91,10 @@ class ClientesModel extends Query{
         $sql = "SELECT d.* FROM pedidos p INNER JOIN detalle_pedidos d ON p.id = d.id_pedido WHERE p.id = $idPedido";
         return $this->selectAll($sql);
     }
+    public function verMetodosPago($id_metPago){
+        $sql = "SELECT * FROM metodo_pago WHERE id = $id_metPago";
+        return $this->selectAll($sql);
+    }
 }
  
 ?>

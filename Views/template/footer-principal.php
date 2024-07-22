@@ -147,7 +147,7 @@
               <button class="btn btn-primary" type="button" id="login">Login</button>
             </div>
           </div>
-          <!-- formulario de registro -->
+          <!-- formulario de registro-->
           <div class="col-md-12 d-none" id="frmRegister">
             <div class="form-group mb-3">
               <label for="nombreRegistro"><i class="fas fa-list"></i> Nombre</label>

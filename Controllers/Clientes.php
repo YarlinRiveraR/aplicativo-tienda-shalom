@@ -201,6 +201,13 @@ class Clientes extends Controller
         die();
     }
 
+    //ver Metodos de pago
+    public function verMetodoPago(){
+        $data['metodosPago'] = $this->model->verMetodosPago();
+        echo json_encode($data);
+        die();
+    }
+
     //cerrar la sesión del cliente
     public function salir()
     {

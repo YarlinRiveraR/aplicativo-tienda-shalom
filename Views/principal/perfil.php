@@ -43,26 +43,37 @@
                             <div class="col-md-12">
                                 <div class="card shadow-lg">
                                     <div class="card-body text-center">
-                                        <img class="img-thumbnail rounded-circle" src="<?php echo BASE_URL . 'assets/img/logo.png'; ?>" alt="" width="100">
+                                        <img class="img-thumbnail rounded-circle" src="<?php echo BASE_URL . 'assets/images/logo.png'; ?>" alt="" width="100">
                                         <hr>
                                         <p><?php echo $_SESSION['nombreCliente']; ?></p>
                                         <p><i class="fas fa-envelope"></i> <?php echo $_SESSION['correoCliente']; ?></p>
-                                        <div class="accordion" id="accordionExample">
+                                        
+                                        <button class="btn btn-success" id="btnFinalizarPago">Realiza tu pago aquí</button>
+
+                                        <!-- <li class="btn btn-primary" href="#" >Realiza tu pago aquí</li>                                                                         -->
+
+                                        <div class="accordion" id="accordionMetodosPago">
+                                            <!-- ?php foreach ($data['metodosPago'] as $metodoPago) { ?>
                                             <div class="card">
                                                 <div class="card-header" id="headingOne">
                                                     <h2 class="mb-0">
                                                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                            Paypal
+                                                            ?php echo BASE_URL . $metodoPago['nombre']; ?>
                                                         </button>
                                                     </h2>
                                                 </div>
 
                                                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        <div id="paypal-button-container"></div>
+                                                        <div>
+                                                            <img class="img-thumbnail rounded-circle" src="?php echo BASE_URL . $metodoPago['imagen']; ?>" alt="" width="100">
+                                                        </div>
+                                                        <h6>Número de Cuenta:</h6>
+                                                        <p>?php echo BASE_URL . $metodoPago['numero_cuenta']; ?></p>
                                                     </div>
                                                 </div>
-                                            </div>                                            
+                                            </div>
+                                            ?php } ?> -->
                                         </div>
                                         <a class="btn btn-danger" href="<?php echo BASE_URL . 'clientes/salir'; ?>"><i class="fas fa-times-circle"></i> Cerrar Sesión</a>
                                     </div>
@@ -168,6 +179,8 @@
 <script src="<?php echo BASE_URL; ?>assets/js/es-ES.js"></script>
 
 <script src="<?php echo BASE_URL . 'assets/js/clientes.js'; ?>"></script>
+
+<script src="<?php echo BASE_URL . 'assets/js/modulos/metodosPago.js'; ?>"></script>
 
 <!-- End Script -->
 </body>
