@@ -47,8 +47,10 @@
                                         <hr>
                                         <p><?php echo $_SESSION['nombreCliente']; ?></p>
                                         <p><i class="fas fa-envelope"></i> <?php echo $_SESSION['correoCliente']; ?></p>
-                                        
-                                        <button class="btn btn-success" id="btnFinalizarPago">Realiza tu pago aquí</button>
+
+                                        <button class="btn btn-success" id="btnFinalizarPago">
+                                            <i class="fab fa-whatsapp"></i> Completa tu pedido acá
+                                        </button>
 
                                         <!-- <li class="btn btn-primary" href="#" >Realiza tu pago aquí</li>                                                                         -->
 
@@ -173,6 +175,12 @@
 </div>
 
 <?php include_once 'Views/template/footer-principal.php'; ?>
+
+<!-- css -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Start Script -->
 
 <script type="text/javascript" src="<?php echo BASE_URL . 'assets/DataTables/datatables.min.js'; ?>"></script>
 

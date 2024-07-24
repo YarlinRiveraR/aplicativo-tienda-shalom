@@ -1,5 +1,5 @@
 const tableLista = document.querySelector("#tableListaProductos tbody");
-const tableListaPago = document.querySelector("#tableListaProductosPago tbody");
+//const tableListaPago = document.querySelector("#tableListaProductosPago tbody");
 const btnFinalizarPago = document.querySelector("#btnFinalizarPago");
 //const accordionMetodosPago = document.querySelector("#accordionMetodosPago");
 const tblPendientes = document.querySelector('#tblPendientes');
@@ -15,12 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //     getListaProductosPago();
     // }
 
-    btnFinalizarPago.addEventListener('click', function() {
-        let mensaje = generarMensajeCarrito();
-        let telefono = "+573004413069"; // Reemplaza esto con el número de teléfono destino
-        let url = `https://api.whatsapp.com/send?phone=${telefono}&text=${mensaje}`;
-        window.open(url, '_blank');
-    })
+    
 
     //cargar datos pendientes con DataTables
     $('#tblPendientes').DataTable({
@@ -152,59 +147,47 @@ function getListaProductos() {
 }
 
 function generarMensajeCarrito() {
-    let listaCarrito = JSON.parse(localStorage.getItem("listaCarrito"));
-    if (!listaCarrito || listaCarrito.length === 0) {
+    const listaCarrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
+    if (listaCarrito.length === 0) {
         return "El carrito está vacío.";
     }
 
-    let mensaje = "Hola! 👋\n\nAquí está tu carrito de compras:\n\n";
+    const url = base_url + 'principal/listaProductos';
+    const http = new XMLHttpRequest();
+    http.open('POST', url, true);
+    http.setRequestHeader('Content-Type', 'application/json');
+    http.send(JSON.stringify(listaCarrito));
 
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            let mensaje = "Hola! 👋\n\n";
+            mensaje += "Quiero confirmar mi pedido:\n\n";
 
-    for (let i = 0; i < listaCarrito.length; i++) {
-        let producto = listaCarrito[i];
-        mensaje += `${i + 1}. ${producto.nombre}\n`;
-        mensaje += `Cantidad: ${producto.cantidad}\n`;
-        mensaje += `Talla: ${producto.talla}\n`;
-        mensaje += `Precio: ${producto.subTotal} c/u\n\n`;
+            for (let i = 0; i < res.productos.length; i++) {
+                const producto = res.productos[i];
+                mensaje += `${i + 1}. ${producto.nombre}\n`;
+                mensaje += `Cantidad: ${producto.cantidad}\n`;
+                mensaje += `Talla: ${listaCarrito[i].talla}\n`;
+                mensaje += `Precio: ${producto.precio} ${res.moneda}\n\n`;
+            }
+            mensaje += `Total a pagar: ${res.total} ${res.moneda}\n\n`;
+            mensaje += "¿Cuál es el siguiente paso? Por favor, indicame qué métodos de pago aceptan. ¡Gracias! 😊";
+            
+            // Reemplazar saltos de línea con %0A para WhatsApp
+            mensaje = mensaje.replace(/\n/g, '%0A');
+
+            let telefono = "+573057366066"; // Reemplaza esto con el número de teléfono destino
+            let urlWhatsApp = `https://api.whatsapp.com/send?phone=${telefono}&text=${mensaje}`;
+            window.open(urlWhatsApp, '_blank');
+        }
     }
-
-    mensaje += "¿Cuál es el siguiente paso? Por favor, indícanos la dirección de entrega y el método de pago que prefieres. ¡Gracias! 😊";
-    console.log(mensaje);
-    return encodeURIComponent(mensaje);
-
-    // const miTalla = JSON.parse(localStorage.getItem('listaCarrito'));
-    // let html = '';
-    // const url = base_url + 'principal/listaProductos';
-    // const http = new XMLHttpRequest();
-    // http.open('POST', url, true);
-    // http.send(JSON.stringify(listaCarrito));
-    // http.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         const res = JSON.parse(this.responseText);
-    //         if (res.total > 0) {
-    //             // Reemplazar el forEach con un bucle for
-    //             for (let i = 0; i < res.productos.length; i++) {
-    //                 const producto = res.productos[i];
-    //                 html += `<tr>
-    //                     <td>${producto.nombre}</td>
-    //                     <td>${res.moneda + ' ' + producto.precio}</td>
-    //                     <td>${miTalla[i].talla}</td>
-    //                     <td><h3>${producto.cantidad}</h3></td>
-    //                     <td>${producto.subTotal}</td>
-    //                 </tr>`;
-    //             }
-    //             tableListaPago.innerHTML = html;
-    //             document.querySelector('#totalProducto').textContent = 'TOTAL A PAGAR: ' + res.moneda + ' ' + res.total;
-    //         } else {
-    //             tableListaPago.innerHTML = `
-    //             <tr>
-    //                 <td colspan="5" class="text-center">ERROR</td>
-    //             </tr>
-    //             `;
-    //         }
-    //     }
-    // }
 }
+
+btnFinalizarPago.addEventListener('click', function() {
+    generarMensajeCarrito();
+});
+
 //link boton
 // https://developer.paypal.com/docs/checkout/
 
@@ -297,6 +280,15 @@ function verPedido(idPedido) {
     }
 
 }
+
+// btnFinalizarPago.addEventListener('click', function() {
+//     let mensajeFinal = generarMensajeCarrito();
+//     let telefono = "+573057366066"; // Reemplaza esto con el número de teléfono destino
+//     let url = `https://api.whatsapp.com/send?phone=${telefono}&text=${mensajeFinal}`;
+//     console.log("este log de la url " + mensajeFinal);
+//     window.open(url, '_blank');
+// })
+
 
 // sb-j6jdb7896999@personal.example.com
 // e8O2lR-I

@@ -45,12 +45,12 @@ class ClientesModel extends Query{
     }
 
     public function registrarPedido($id_transaccion, $monto, $estado, $fecha, $email,
-    $nombre, $apellido, $direccion, $ciudad, $id_cliente)
+    $nombre, $apellido, $id_cliente)
     {
         $sql = "INSERT INTO pedidos (id_transaccion, monto, estado, fecha, email,
-        nombre, apellido, direccion, ciudad, id_cliente) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        nombre, apellido, id_cliente) VALUES (?,?,?,?,?,?,?,?)";
         $datos = array($id_transaccion, $monto, $estado, $fecha, $email,
-        $nombre, $apellido, $direccion, $ciudad, $id_cliente);
+        $nombre, $apellido, $id_cliente);
         $data = $this->insertar($sql, $datos);
         if ($data > 0) {
             $res = $data;

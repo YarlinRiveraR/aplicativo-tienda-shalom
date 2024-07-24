@@ -17,7 +17,8 @@ class Clientes extends Controller
     //mostrar el perfil del cliente
     public function index()
     {
-        if (empty($_SESSION['correoCliente'])) {
+        if (empty($_SESSION['correoCliente'])) 
+        {
             header('Location: ' . BASE_URL);
         }
         $data['perfil'] = 'si';
@@ -84,7 +85,7 @@ class Clientes extends Controller
                 $mail->Subject = 'Mensaje desde la: ' . TITLE;
                 $mail->Body    = 'Para verificar tu correo en nuestra tienda <a href="' . BASE_URL . 'clientes/verificarCorreo/' . $_POST['token'] . '">CLIC AQUÍ</a>';
                 $mail->AltBody = 'GRACIAS POR LA PREFERENCIA';
-
+                
                 $mail->send();
                 $mensaje = array('msg' => 'CORREO ENVIADO, REVISA TU BANDEJA DE ENTRADA - SPAN', 'icono' => 'success');
             } catch (Exception $e) {
@@ -142,15 +143,16 @@ class Clientes extends Controller
         $pedidos = $json['pedidos'];
         $productos = $json['productos'];
         if (is_array($pedidos) && is_array($productos)) {
-            $id_transaccion = $pedidos['id'];
+            $id_transaccion = substr(bin2hex(random_bytes(17)), 0, 17);
+            //$id_transaccion = $pedidos['id'];
             $monto = $pedidos['purchase_units'][0]['amount']['value'];
             $estado = $pedidos['status'];
             $fecha = date('Y-m-d H:i:s');
-            $email = $pedidos['payer']['email_address'];
-            $nombre = $pedidos['payer']['name']['given_name'];
-            $apellido = $pedidos['payer']['name']['surname'];
-            $direccion = $pedidos['purchase_units'][0]['shipping']['address']['address_line_1'];
-            $ciudad = $pedidos['purchase_units'][0]['shipping']['address']['admin_area_2'];
+            $email = $_SESSION['correoCliente'];
+            $nombre = $_SESSION['nombreCliente'];
+            // $apellido = $pedidos['payer']['name']['surname'];
+            // $direccion = $pedidos['purchase_units'][0]['shipping']['address']['address_line_1'];
+            // $ciudad = $pedidos['purchase_units'][0]['shipping']['address']['admin_area_2'];
             $id_cliente = $_SESSION['idCliente'];
             $data = $this->model->registrarPedido(
                 $id_transaccion,
@@ -159,9 +161,9 @@ class Clientes extends Controller
                 $fecha,
                 $email,
                 $nombre,
-                $apellido,
-                $direccion,
-                $ciudad,
+                // $apellido,
+                // $direccion,
+                // $ciudad,
                 $id_cliente
             );
             if ($data > 0) {

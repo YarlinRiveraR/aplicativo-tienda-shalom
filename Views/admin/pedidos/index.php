@@ -26,7 +26,7 @@
                                 <th>Correo</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Dirección</th>
+                                <!-- <th>Dirección</th> -->
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                                 <th>Correo</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Dirección</th>
+                                <!-- <th>Dirección</th> -->
                                 <th></th>
                             </tr>
                         </thead>
@@ -76,7 +76,7 @@
                                 <th>Correo</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Dirección</th>
+                                <!-- <th>Dirección</th> -->
                                 <th></th>
                             </tr>
                         </thead>
